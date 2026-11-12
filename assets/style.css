@@ -19,7 +19,7 @@
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .32  0 0 0 0 .26  0 0 0 0 .17  0 0 0 .075 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   --serif: "Source Serif 4", Cambria, Georgia, serif;
   --sans: "Source Sans 3", Calibri, "Segoe UI", system-ui, sans-serif;
-  --topbar-h: 52px;
+  --topbar-h: 48px;
 }
 
 * { box-sizing: border-box; }
@@ -46,21 +46,27 @@ a { color: var(--blue-700); }
 /* ---------- Topbar ---------- */
 .topbar {
   position: fixed; inset: 0 0 auto 0; height: var(--topbar-h); z-index: 50;
-  background: rgba(245, 240, 230, .94); backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--rule);
+  background: var(--paper) var(--grain);
+  border-top: 3px solid var(--blue-900);   /* a címlap kékje: újságos felső csík */
+  border-bottom: 1px solid var(--ink);
   transform: translateY(-100%); transition: transform .3s ease;
 }
 .topbar.visible { transform: none; }
-.topbar nav { display: flex; align-items: center; gap: 24px; height: 100%; padding: 0 24px; max-width: 1280px; margin: 0 auto; }
-.brand { font-family: var(--serif); font-weight: 700; color: var(--blue-900); text-decoration: none; white-space: nowrap; }
-.chapters { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
-.chapters a {
-  display: block; padding: 6px 10px; border-radius: 4px; font-size: .85rem; white-space: nowrap;
-  color: var(--muted); text-decoration: none; font-weight: 600;
+.topbar nav { display: flex; align-items: stretch; height: 100%; padding: 0 24px; max-width: 1280px; margin: 0 auto; }
+.brand {
+  display: flex; align-items: center; padding-right: 20px; margin-right: 8px; border-right: 1px solid var(--rule);
+  font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--blue-900); text-decoration: none; white-space: nowrap;
 }
-.chapters a:hover { color: var(--ink); background: var(--panel); }
-.chapters a.active { color: var(--blue-900); background: var(--panel); box-shadow: inset 0 -2px 0 var(--orange); }
-.progress { position: absolute; left: 0; bottom: -1px; height: 3px; width: 0; background: var(--orange); }
+.chapters { flex: 1; display: flex; justify-content: space-between; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+.chapters li { display: flex; }
+.chapters a {
+  display: flex; align-items: center; padding: 0 12px; white-space: nowrap;
+  font-family: var(--serif); font-size: .74rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--ink-2); text-decoration: none; transition: background .15s, color .15s;
+}
+.chapters a:hover { color: var(--blue-900); background: rgba(10, 37, 64, .05); }
+.chapters a.active { color: var(--blue-900); background: #DDE5EC; }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--orange); }
 
 /* ---------- Common blocks ---------- */
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
@@ -97,6 +103,14 @@ a { color: var(--blue-700); }
 .cta {
   display: inline-block; padding: 10px 18px; border: 1px solid rgba(255,255,255,.4);
   border-radius: 4px; color: #fff; text-decoration: none; font-weight: 600;
+}
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.key-hint { margin: 0; font-size: .85rem; color: var(--blue-200); }
+@media (hover: none) and (pointer: coarse) { .key-hint { display: none; } } /* érintőképernyőn nincs billentyűzet */
+.key-hint kbd {
+  display: inline-block; min-width: 1.7em; padding: 1px 6px; margin: 0 1px; text-align: center;
+  font: 600 .8rem var(--sans); color: #fff; border: 1px solid rgba(255,255,255,.35);
+  border-bottom-width: 2px; border-radius: 4px; background: rgba(255,255,255,.06);
 }
 .cta:hover { background: rgba(255,255,255,.08); }
 .hero-chart { margin: 0; }

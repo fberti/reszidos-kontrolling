@@ -753,6 +753,13 @@
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.dataset.chapter));
+      // keskeny képernyőn a vízszintesen görgethető menüben az aktív fejezet maradjon látható
+      const act = navLinks.find(l => l.classList.contains("active"));
+      const bar = act && act.closest(".chapters");
+      if (bar && bar.scrollWidth > bar.clientWidth) {
+        const x = act.getBoundingClientRect().left - bar.getBoundingClientRect().left + bar.scrollLeft;
+        bar.scrollTo({ left: x - (bar.clientWidth - act.offsetWidth) / 2, behavior: "smooth" });
+      }
     });
   }, { rootMargin: "-40% 0px -55% 0px" });
   // Minden szakasz a legutóbbi fejezetcímhez tartozik
