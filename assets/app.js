@@ -533,17 +533,14 @@
       const x1 = d3.scaleBand(ser, [0, x0.bandwidth()]).padding(ser.length > 1 ? 0.1 : 0);
       const data = [];
       bins.forEach((b, i) => ser.forEach(s => data.push({ b, s, v: D.hist["y" + s][i], i })));
-      const dur = anim ? T(500) : 0;
       barsG.selectAll("path").data(data, d => d.b + "-" + d.s).join(
-        enter => enter.append("path").attr("fill", d => HC[d.s])
-          .attr("d", d => barPath(x0(d.b) + x1(d.s), ih, x1.bandwidth(), 0, true)),
+        enter => enter.append("path").attr("fill", d => HC[d.s]),
         update => update,
-        exit => exit.transition().duration(dur).attr("d", d => barPath(x0(d.b) + x0.bandwidth() / 2, ih, 0, 0, true)).remove()
+        exit => exit.remove()
       ).on("pointermove", (ev, d) => {
         const r = `${d.b}–${d.b + 19} pont`;
         showTip(ev, title(r) + ["2022", "2023"].map(s => row(HC[s], s, fPct1(D.hist["y" + s][d.i]))).join("") + note("a sorok aránya az adott évben"));
       }).on("pointerleave", hideTip)
-        .transition().duration(dur)
         .attr("d", d => barPath(x0(d.b) + x1(d.s), ih, x1.bandwidth(), ih - y(d.v), true));
 
       labG.selectAll("*").remove();
@@ -552,8 +549,7 @@
         const v = D.hist["y" + s][i280];
         const shift = ser.length > 1 && s === "2022";
         labG.append("text").attr("class", "value-label").attr("text-anchor", shift ? "start" : "middle")
-          .attr("x", x0(280) + x1(s) + (shift ? 2 : x1.bandwidth() / 2)).attr("y", y(v) - 6).text(fPct(v))
-          .style("opacity", 0).transition().delay(dur).duration(T(250)).style("opacity", 1);
+          .attr("x", x0(280) + x1(s) + (shift ? 2 : x1.bandwidth() / 2)).attr("y", y(v) - 6).text(fPct(v));
       });
       const st = D.hist.stats;
       const f1 = n => fNum1(n).replace(/,0$/, "");
