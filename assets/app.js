@@ -765,6 +765,54 @@
     chapterObs.observe(el);
   });
 
+  // Billentyűs léptetés: ↓ / → előre, ↑ / ← vissza a következő / előző megállóig
+  // Megállók: minden szakasz teteje (a hosszú szakaszokon képernyőnként),
+  // a scrollytelling-lépéseknél pedig a lépés közepe a képernyő közepén.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function navStops() {
+    const vh = window.innerHeight;
+    const topH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--topbar-h")) || 52;
+    const maxY = document.documentElement.scrollHeight - vh;
+    const out = [];
+    document.querySelectorAll("body > section, body > footer").forEach(el => {
+      const r = el.getBoundingClientRect();
+      const top = r.top + window.scrollY;
+      if (el.classList.contains("scrolly")) {
+        el.querySelectorAll(".step").forEach(st => {
+          const sr = st.getBoundingClientRect();
+          out.push(sr.top + window.scrollY + sr.height / 2 - vh / 2);
+        });
+        return;
+      }
+      let y = el.id === "top" ? 0 : top - topH;
+      out.push(y);
+      const bottom = top + r.height;
+      const page = (vh - topH) * 0.85;
+      while (y + vh < bottom - 40) { y = Math.min(y + page, bottom - vh); out.push(y); }
+    });
+    const sorted = out.map(y => Math.round(Math.max(0, Math.min(y, maxY)))).sort((a, b) => a - b);
+    // A túl közeli megállók összevonása (ne legyen „mikro-lépés”)
+    return sorted.reduce((acc, y) => { if (!acc.length || y - acc[acc.length - 1] > vh * 0.3) acc.push(y); return acc; }, []);
+  }
+  let navTarget = null, navTimer;
+  document.addEventListener("keydown", e => {
+    const fwd = e.key === "ArrowDown" || e.key === "ArrowRight";
+    const back = e.key === "ArrowUp" || e.key === "ArrowLeft";
+    if (!fwd && !back) return;
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.defaultPrevented) return;
+    const t = e.target;
+    if (t.closest && t.closest("input, textarea, select, [contenteditable], [role=radiogroup]")) return;
+    const cur = navTarget ?? window.scrollY;
+    const stops = navStops();
+    const next = fwd ? stops.find(y => y > cur + 4) : [...stops].reverse().find(y => y < cur - 4);
+    if (next === undefined) return;
+    e.preventDefault();
+    navTarget = next;
+    clearTimeout(navTimer);
+    navTimer = setTimeout(() => { navTarget = null; }, 900);
+    window.scrollTo({ top: next, behavior: reduceMotion ? "auto" : "smooth" });
+  });
+
   // Átméretezés: újrarajzolás a jelenlegi állapottal
   let lastW = window.innerWidth, rt;
   window.addEventListener("resize", () => {
