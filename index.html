@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nem a felnőttek akartak hirtelen tanulni – részidős jelentkezők 2013–2026</title>
+  <meta name="description" content="Interaktív adattörténet a felvi.hu részidős jelentkezési adatairól: hogyan zárta ki, majd engedte vissza a felnőtteket a felvételi szabályozás.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#jelenseg">Ugrás a tartalomra</a>
+
+  <header class="topbar" id="topbar">
+    <div class="progress" id="progress" aria-hidden="true"></div>
+    <nav aria-label="Fejezetek">
+      <a class="brand" href="#top">Részidős jelentkezők</a>
+      <ol class="chapters">
+        <li><a href="#jelenseg">A jelenség</a></li>
+        <li><a href="#emelt">1. ok: emelt érettségi</a></li>
+        <li><a href="#did">A hatás mérete</a></li>
+        <li><a href="#pont280">2. ok: 280 pont</a></li>
+        <li><a href="#ellenprobak">Ellenpróbák</a></li>
+        <li><a href="#kovetkeztetes">Következtetés</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="kicker light">felvi.hu felvételi adatok · 2013–2026</p>
+        <h1>Nem a felnőttek akartak hirtelen tanulni: 2023&#8209;ban újra beengedték őket</h1>
+        <p class="lede">2023-ban egyetlen év alatt 63%-kal több részidős jelentkező volt. Ez az oldal végigvezet azon, miért: két felvételi szabály, amely 2020 és 2022 között gátat emelt a dolgozó felnőttek elé, majd eltűnt.</p>
+        <a class="cta" href="#harom-mondat">Görgess a történethez ↓</a>
+      </div>
+      <figure class="hero-chart" aria-label="Részidős alapképzés jelentkezői évente, 2013–2026">
+        <div id="hero-chart"></div>
+        <figcaption>Részidős alapképzés, első helyes jelentkezők</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== HÁROM MONDAT ========== -->
+  <section class="section" id="harom-mondat">
+    <div class="wrap">
+      <p class="kicker">A történet három mondatban</p>
+      <ol class="three">
+        <li><span class="num">1</span><h3>Ugrott</h3><p>2023-ban 63%-kal több részidős jelentkező volt, és a részidő aránya tartósan 40% körül maradt.</p></li>
+        <li><span class="num">2</span><h3>Mert leomlott a gát</h3><p>A 2020-ban bevezetett kötelező emelt érettségi harmadával vetette vissza a jelentkezést. Az eltörlése után visszajöttek.</p></li>
+        <li><span class="num">3</span><h3>És a 280 pont is</h3><p>A minimumpont eltörlésével a régen érettségizett felnőttek is bejuthattak. A ponthatárokon ez közvetlenül látszik.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========== 1. A JELENSÉG ========== -->
+  <section class="section alt" id="jelenseg">
+    <div class="wrap">
+      <p class="kicker">A jelenség</p>
+      <h2>2023-ban egy év alatt 63%-kal több részidős jelentkező</h2>
+      <div class="kpis">
+        <div class="kpi wide">
+          <div class="kpi-value"><span class="muted-num" data-count="29728">29 728</span> <span class="arrow">→</span> <span data-count="48439">48 439</span></div>
+          <div class="kpi-label">részidős első helyes jelentkező (2022 → 2023)</div>
+        </div>
+        <div class="kpi accent">
+          <div class="kpi-value" data-count="63" data-prefix="+" data-suffix="%">+63%</div>
+          <div class="kpi-label">egyetlen év alatt</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value">30% → 38%</div>
+          <div class="kpi-label">a részidő aránya az összes jelentkezőből; 2026-ban már 41%</div>
+        </div>
+      </div>
+      <p class="note">Nem egyszeri kiugrás, hanem tartós szerkezetváltás: 2026-ban már <strong>57 437</strong> részidős jelentkező van.</p>
+    </div>
+  </section>
+
+  <section class="scrolly" data-chart="trend" aria-label="Részidős alapképzés jelentkezői, lépésről lépésre">
+    <div class="graphic">
+      <figure class="fig">
+        <figcaption class="fig-title">Részidős alapképzés, első helyes jelentkezők (fő)</figcaption>
+        <div class="chart" id="chart-trend"></div>
+        <p class="source">Forrás: felvi.hu, általános eljárás, első helyes jelentkezők. Részidős = levelező + távoktatás.</p>
+      </figure>
+    </div>
+    <div class="steps">
+      <div class="step" data-step="0"><div class="card">
+        <p class="step-kicker">2013–2019</p>
+        <p>Hét éven át lassú, egyenletes növekedés: a részidős alapképzésre jelentkezők száma 14 ezerről <strong>22 451</strong> főre nőtt.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="card">
+        <p class="step-kicker">2020: bevezetik a gátat</p>
+        <p>2020-tól kötelező az emelt szintű érettségi. A jelentkezés egy év alatt <strong class="hl">−40%</strong>-kal zuhan, 13 493 főre. A szürke sáv a szabály három évét jelöli.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="card">
+        <p class="step-kicker">2023: leomlik a gát</p>
+        <p>Eltörlik az emelt követelményt és a 280 pontos minimumot is. A jelentkezés egy év alatt <strong class="hl">több mint duplájára, +101%</strong>-kal nő.</p>
+      </div></div>
+      <div class="step" data-step="3"><div class="card">
+        <p class="step-kicker">2024–2026</p>
+        <p>És ott is marad: 2026-ban <strong>36 799</strong> jelentkező. A görbe pontosan a szabályváltozásoknál törik meg. De az egybeesés még nem bizonyíték, ezért nézzük meg, tényleg a szabály okozta-e.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========== 2. EMELT ÉRETTSÉGI ========== -->
+  <section class="section" id="emelt">
+    <div class="wrap">
+      <p class="kicker">1. ok · Az emelt érettségi</p>
+      <h2>Csak az alapképzés zuhant 2020-ban: a mester, amire a szabály nem vonatkozott, nem</h2>
+      <p class="intro">Az emelt érettségi az alap- és az osztatlan képzésre jelentkezőkre vonatkozott, a mesterképzésre nem, hiszen oda diplomával jelentkeznek. Ha a szabály okozta a zuhanást, a mesternek nem szabad zuhannia.</p>
+    </div>
+  </section>
+
+  <section class="scrolly" data-chart="index" aria-label="Képzési szintek indexe, lépésről lépésre">
+    <div class="graphic">
+      <figure class="fig">
+        <figcaption class="fig-title">Részidős első helyes jelentkezők képzési szintenként, index (2019 = 100)</figcaption>
+        <div class="legend" id="legend-index" role="group" aria-label="Sorozatok ki- és bekapcsolása"></div>
+        <div class="chart" id="chart-index"></div>
+        <p class="source">Forrás: felvi.hu, általános eljárás, első helyes jelentkezők. Részidős = levelező + távoktatás. A jelmagyarázat elemeire kattintva sorozatok kapcsolhatók ki-be.</p>
+      </figure>
+    </div>
+    <div class="steps">
+      <div class="step" data-step="0"><div class="card">
+        <p class="step-kicker">Közös kiindulópont</p>
+        <p>Minden képzési szintet a 2019-es szintjéhez mérünk (2019 = 100). A két fő szereplő: a <span class="swatch s-alap"></span><strong>részidős alapképzés</strong>, amire a szabály vonatkozott, és a <span class="swatch s-mester"></span><strong>mesterképzés</strong>, amire nem.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="card">
+        <p class="step-kicker">2020</p>
+        <p>Az alapképzés <strong class="hl">60</strong>-ra esik vissza, a mesterképzés csak <strong>91</strong>-re, és 2021-ben már túl is lépi a 2019-es szintet.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="card">
+        <p class="step-kicker">A többi szint</p>
+        <p>A <strong>FOSZK</strong>-ra sem vonatkozott a szabály, és ott sincs zuhanás. Az <strong>osztatlan</strong> képzés kivétel: rá is vonatkozott, mégsem esett vissza, valószínűleg mert ide eleve emelt érettségivel vagy diplomával jelentkeznek. A bizonyítást ezért az alapképzésre építjük.</p>
+      </div></div>
+      <div class="step" data-step="3"><div class="card">
+        <p class="step-kicker">2023 után</p>
+        <p>Az eltörlés után az alapképzés egy év alatt 72-ről <strong class="hl">144</strong>-re ugrik. A mester is nő, de egyenletesebben: ezt a különbséget fogjuk számszerűsíteni.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap two-col">
+      <figure class="fig">
+        <p class="kicker">1. ok · Az emelt érettségi</p>
+        <h3 class="fig-h">Nappalin ugyanez a szabály sokkal kisebbet mozdított</h3>
+        <div class="legend static" id="legend-np"></div>
+        <div class="chart" id="chart-np"></div>
+        <p class="source">Alapképzés, első helyes jelentkezők, változás az előző évhez képest. Forrás: felvi.hu.</p>
+        <div class="tablebox" data-table="np"></div>
+      </figure>
+      <aside class="why">
+        <p class="kicker">Miért?</p>
+        <p class="big-quote">A friss érettségizők tesznek emelt szintű érettségit, a dolgozó felnőttek nem.</p>
+        <p>A szabály tehát elsősorban a levelezőre jelentkezőket érte: bevezetéskor részidőn <strong>−40%</strong>, nappalin <strong>−19%</strong>; eltörléskor részidőn <strong>+101%</strong>, nappalin <strong>+18%</strong>.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ========== 3. DID ========== -->
+  <section class="section alt" id="did">
+    <div class="wrap">
+      <p class="kicker">1. ok · A hatás mérete</p>
+      <h2>A kontrollcsoporthoz mérve: a gát harmadával csökkentette a jelentkezést</h2>
+      <div class="did-setup">
+        <div class="group treated">
+          <p class="tag">Kezelt csoport</p>
+          <h3>Részidős alapképzés</h3>
+          <p>rá vonatkozott a szabály</p>
+        </div>
+        <div class="vs">vs.</div>
+        <div class="group control">
+          <p class="tag">Kontroll</p>
+          <h3>Részidős mesterképzés</h3>
+          <p>ugyanaz a felnőtt közönség, de a szabály nem érintette</p>
+        </div>
+        <p class="did-q">Nem azt kérdezzük, hogy nőtt-e az alapképzés, hanem azt, hogy <em>jobban</em> nőtt-e, mint a mester.</p>
+      </div>
+      <div class="kpis">
+        <div class="kpi accent">
+          <div class="kpi-value">−29,0%</div>
+          <div class="kpi-label">kevesebb jelentkező a gát alatt (2020–22), a kontrollhoz mérve</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value">−6,6%</div>
+          <div class="kpi-label">a gát eltörlése után (2023–26): majdnem visszaállt a bázisszintre</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value">≈ 19 400 fő</div>
+          <div class="kpi-label">„hiányzó” jelentkező 2020–22-ben, évente ≈ 6 500</div>
+        </div>
+      </div>
+      <p class="method">Különbségek különbsége arányokkal: (alap / mester) az időszakban ÷ (alap / mester) a 2017–19-es bázisban − 1.</p>
+    </div>
+  </section>
+
+  <section class="scrolly" data-chart="event" aria-label="Eseményelemzés, lépésről lépésre">
+    <div class="graphic">
+      <figure class="fig">
+        <figcaption class="fig-title">Eseményelemzés: az alap / mester arány eltérése a 2019-es szinttől</figcaption>
+        <div class="chart" id="chart-event"></div>
+        <p class="source">(alap / mester) az adott évben ÷ (alap / mester) 2019-ben − 1. Részidős, általános eljárás.</p>
+      </figure>
+    </div>
+    <div class="steps">
+      <div class="step" data-step="0"><div class="card">
+        <p class="step-kicker">A feltétel: párhuzamos trend</p>
+        <p>2017–19-ben az eltérés kicsi (<strong>−7% … 0</strong>), szemben a 2013–16-os −18…−26%-kal: a bázisidőszakban a két csoport nagyjából együtt mozgott. Ez a módszer legfontosabb feltétele, ezért a bázis 2017–19.</p>
+      </div></div>
+      <div class="step" data-step="1"><div class="card">
+        <p class="step-kicker">A gát három éve</p>
+        <p>2020-ban, 2021-ben és 2022-ben stabilan <strong class="hl">−31% … −34%</strong>-kal a várt szint alatt. Nem zaj, hanem egy lépcső, pontosan a szabály három évére.</p>
+      </div></div>
+      <div class="step" data-step="2"><div class="card">
+        <p class="step-kicker">2023</p>
+        <p>Az eltörléssel hirtelen visszaugrik, utána a 2013–16-os szint közelében stabilizálódik.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <figure class="fig">
+        <p class="kicker">Mennyi jelentkező hiányzott?</p>
+        <h3 class="fig-h">A gát nélkül várható létszám és a tényleges létszám közötti rés</h3>
+        <div class="controls">
+          <label for="effect-slider">Feltételezett gát-hatás: <output id="effect-out">−29,0%</output></label>
+          <input type="range" id="effect-slider" min="10" max="40" step="0.5" value="29" aria-describedby="effect-help">
+          <button class="btn ghost" id="effect-reset" type="button">Vissza a becsléshez (−29,0%)</button>
+        </div>
+        <p class="help" id="effect-help">A csúszkával megnézheted, mennyire érzékeny a „hiányzó” létszám a hatás méretére. A becslés a különbségek különbsége módszerből: −29,0%.</p>
+        <div class="cf-wrap">
+          <div class="chart" id="chart-cf"></div>
+          <div class="cf-kpi">
+            <div class="kpi accent"><div class="kpi-value" id="cf-total">≈ 19 400</div><div class="kpi-label">„hiányzó” jelentkező 2020–22-ben</div></div>
+            <div class="kpi"><div class="kpi-value" id="cf-year">≈ 6 500</div><div class="kpi-label">évente átlagosan</div></div>
+          </div>
+        </div>
+        <p class="source">Várható létszám = tényleges ÷ (1 + gát-hatás). Részidős alapképzés.</p>
+        <div class="tablebox" data-table="cf"></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== 4. 280 PONT ========== -->
+  <section class="section alt" id="pont280">
+    <div class="wrap">
+      <p class="kicker">2. ok · A 280 pont</p>
+      <h2>2015 és 2022 között egyetlen sor sem mehetett 280 pont alá, 2023-ban a negyede igen</h2>
+      <div class="two-col wide-left">
+        <figure class="fig">
+          <figcaption class="fig-title">280 pont alatti ponthatárú sorok aránya, részidős alapképzés</figcaption>
+          <div class="legend static" id="legend-280"></div>
+          <div class="chart" id="chart-280"></div>
+          <p class="source">Részidős alapképzési sorok, ahová legalább egy hallgatót felvettek. 2013–14-ben még alacsonyabb volt a jogszabályi minimum.</p>
+          <div class="tablebox" data-table="b280"></div>
+        </figure>
+        <div class="kpi-stack">
+          <div class="kpi accent"><div class="kpi-value">0 → 125</div><div class="kpi-label">állami ösztöndíjas sor 280 alatt (383, ill. 492 sorból), 2022 → 2023<br><span class="small">χ² = 113,5, p &lt; 0,001</span></div></div>
+          <div class="kpi"><div class="kpi-value">25%</div><div class="kpi-label">az állami ösztöndíjas, 43% az önköltséges részidős soroknál (2023)</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap two-col wide-left">
+      <figure class="fig">
+        <p class="kicker">2. ok · A 280 pont</p>
+        <h3 class="fig-h">A 280-as fal leomlott: az eloszlás alja kinyílt, a közepe alig mozdult</h3>
+        <div class="controls seg" role="radiogroup" aria-label="Év kiválasztása">
+          <button class="seg-btn" role="radio" data-year="2022" aria-checked="false">2022</button>
+          <button class="seg-btn" role="radio" data-year="2023" aria-checked="false">2023</button>
+          <button class="seg-btn" role="radio" data-year="both" aria-checked="true">Összevetés</button>
+        </div>
+        <div class="legend static" id="legend-hist"></div>
+        <div class="chart" id="chart-hist"></div>
+        <p class="source">Részidős állami ösztöndíjas alapképzési sorok ponthatára, 20 pontos sávok (a sáv kezdőpontja). Sorok aránya évenként.</p>
+        <div class="tablebox" data-table="hist"></div>
+      </figure>
+      <div class="kpi-stack">
+        <div class="kpi accent"><div class="kpi-value" id="hist-min">280 → 108</div><div class="kpi-label">a legalacsonyabb ponthatár (pont): az eloszlás alja kinyílt</div></div>
+        <div class="kpi"><div class="kpi-value" id="hist-med">294 → 299,5</div><div class="kpi-label">a medián ponthatár (pont): a közepe alig mozdult</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap two-col wide-left">
+      <figure class="fig">
+        <p class="kicker">2. ok · A 280 pont</p>
+        <h3 class="fig-h">A minimum éppen a levelezősöket szűrte: részidőn 1,6-szer gyakoribb a 280 alatti ponthatár</h3>
+        <div class="chart" id="chart-adm"></div>
+        <p class="source">A felvett részidős alapképzésesek közül 280 alatti ponthatárú soron tanulók aránya. Felső becslés: a ponthatár a felvettek minimuma.</p>
+        <div class="tablebox" data-table="adm"></div>
+      </figure>
+      <div class="kpi-stack">
+        <div class="kpi accent"><div class="kpi-value">1,6×</div><div class="kpi-label">részidőn 47%, nappalin 30% a 280 alatti ponthatárú sorok aránya (2023–26)</div></div>
+        <div class="kpi"><div class="kpi-value">1,5×</div><div class="kpi-label">állami ösztöndíjas és önköltséges sorokon külön-külön is</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 5. ELLENPRÓBÁK ========== -->
+  <section class="section" id="ellenprobak">
+    <div class="wrap">
+      <p class="kicker">Ellenpróbák</p>
+      <h2>13 évváltásból csak kettő lóg ki, és éppen a két reformév</h2>
+      <div class="two-col wide-left">
+        <figure class="fig">
+          <figcaption class="fig-title">Az alap / mester arány változása az előző évhez képest (az oszlop a záróév)</figcaption>
+          <div class="controls">
+            <label class="check"><input type="checkbox" id="placebo-band" checked> A többi 11 évváltás sávjának mutatása</label>
+          </div>
+          <div class="chart" id="chart-placebo"></div>
+          <p class="source">Placebo időben: minden évváltásra az alap / mester arány változása (részidős, általános eljárás).</p>
+          <div class="tablebox" data-table="placebo"></div>
+        </figure>
+        <div class="kpi-stack">
+          <div class="kpi accent"><div class="kpi-value">2020, 2023</div><div class="kpi-label">a két legnagyobb kilengés (−34%, +59%): éppen a két reformév</div></div>
+          <div class="kpi"><div class="kpi-value">−20% … +13%</div><div class="kpi-label">a többi 11 évváltás sávja: a reformévek messze kívül esnek</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <p class="kicker">Ellenpróbák</p>
+      <h2>Az alternatív magyarázatok nem illenek a mintázatra</h2>
+      <div class="alt-table" id="alt-table"></div>
+      <div class="kpis two">
+        <div class="kpi accent"><div class="kpi-value">−21,6%</div><div class="kpi-label">ennyivel erősebb volt a gát részidőn (−29%), mint nappalin (−9%)</div></div>
+        <div class="kpi"><div class="kpi-value">Felnőtteket</div><div class="kpi-label">sújtott a szabály: ez megerősíti a mechanizmust</div></div>
+      </div>
+      <p class="method">Hármas különbség arányokkal: a gát-hatás részidőn és nappalin (2020–22 vs. 2017–19).</p>
+    </div>
+  </section>
+
+  <!-- ========== 6. KÖVETKEZTETÉS ========== -->
+  <section class="section dark" id="kovetkeztetes">
+    <div class="wrap">
+      <p class="kicker light">Következtetés</p>
+      <h2>A felvételi szabály nem technikai részlet</h2>
+      <ol class="three dark">
+        <li><span class="num">1</span><h3>Évente 6–7 ezer fő</h3><p>A gát három év alatt ≈ 19 400 részidős jelentkezőt tartott távol. Egy felvételi szabály ekkora tétet mozgat.</p></li>
+        <li><span class="num">2</span><h3>Előzetes hatásvizsgálat</h3><p>Szigorítás előtt érdemes munkarend szerint becsülni a hatást: ugyanaz a szabály részidőn kb. háromszor akkora, mint nappalin (−29% vs. −9%).</p></li>
+        <li><span class="num">3</span><h3>Mérni kell, kit érint</h3><p>Életkor és előképzettség szerinti bontás kell. Ezzel ellenőrizhető, hogy a többlet a felnőttekből jött.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer class="section appendix" id="modszertan">
+    <div class="wrap">
+      <p class="kicker">Függelék</p>
+      <h2>Módszertan, korlátok, források</h2>
+      <div class="three-col">
+        <div><h3>Adat és definíciók</h3><ul>
+          <li>felvi.hu statisztikai export, 2013–2026, általános eljárás, első helyes jelentkezők.</li>
+          <li>Részidős = levelező + távoktatás; az esti tagozat (kb. 1%) kimarad.</li></ul></div>
+        <div><h3>Korlátok</h3><ul>
+          <li>Megfigyelési adat; a párhuzamos trend 2017–19-ben teljesül, korábban nem teljesen.</li>
+          <li>2023-ban két szabály szűnt meg egyszerre, a hatásuk nem választható szét teljesen.</li></ul></div>
+        <div><h3>Források</h3><ul>
+          <li>felvi.hu; a 2020-as és 2023-as felvételi szabályváltozások jogszabályai és sajtóhírei.</li></ul></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
