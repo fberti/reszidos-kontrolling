@@ -802,6 +802,18 @@
     return sorted.reduce((acc, y) => { if (!acc.length || y - acc[acc.length - 1] > vh * 0.3) acc.push(y); return acc; }, []);
   }
   let navTarget = null, navTimer;
+  // dir: +1 előre, −1 vissza; igazat ad, ha volt hová lépni
+  function navStep(dir) {
+    const cur = navTarget ?? window.scrollY;
+    const stops = navStops();
+    const next = dir > 0 ? stops.find(y => y > cur + 4) : [...stops].reverse().find(y => y < cur - 4);
+    if (next === undefined) return false;
+    navTarget = next;
+    clearTimeout(navTimer);
+    navTimer = setTimeout(() => { navTarget = null; updateNavBtns(); }, 900);
+    window.scrollTo({ top: next, behavior: reduceMotion ? "auto" : "smooth" });
+    return true;
+  }
   document.addEventListener("keydown", e => {
     const fwd = e.key === "ArrowDown" || e.key === "ArrowRight";
     const back = e.key === "ArrowUp" || e.key === "ArrowLeft";
@@ -809,16 +821,21 @@
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.defaultPrevented) return;
     const t = e.target;
     if (t.closest && t.closest("input, textarea, select, [contenteditable], [role=radiogroup]")) return;
-    const cur = navTarget ?? window.scrollY;
-    const stops = navStops();
-    const next = fwd ? stops.find(y => y > cur + 4) : [...stops].reverse().find(y => y < cur - 4);
-    if (next === undefined) return;
-    e.preventDefault();
-    navTarget = next;
-    clearTimeout(navTimer);
-    navTimer = setTimeout(() => { navTarget = null; }, 900);
-    window.scrollTo({ top: next, behavior: reduceMotion ? "auto" : "smooth" });
+    if (navStep(fwd ? 1 : -1)) e.preventDefault();
   });
+
+  // Lebegő léptetőgombok (érintőkijelzőhöz, pl. interaktív tábla)
+  const navPrev = document.getElementById("nav-prev");
+  const navNext = document.getElementById("nav-next");
+  function updateNavBtns() {
+    const y = window.scrollY, maxY = document.documentElement.scrollHeight - window.innerHeight;
+    navPrev.disabled = y < 4;
+    navNext.disabled = y > maxY - 4;
+  }
+  navPrev.addEventListener("click", () => navStep(-1));
+  navNext.addEventListener("click", () => navStep(1));
+  window.addEventListener("scroll", updateNavBtns, { passive: true });
+  updateNavBtns();
 
   // Átméretezés: újrarajzolás a jelenlegi állapottal
   let lastW = window.innerWidth, rt;
