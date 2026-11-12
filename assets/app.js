@@ -6,9 +6,9 @@
 
   // ---------- Alapok ----------
   const C = {
-    orange: "#D9512C", orangeSoft: "#F2B8A4", green: "#1F5A4A", green9: "#173F35",
-    green4: "#6E9A8B", green2: "#A9C3B9", gray: "#8A948F", gray2: "#C4CAC5",
-    panel: "#EEF1EC", rule: "#E3E7E3", ink: "#16211C", muted: "#5F6964"
+    orange: "#D9512C", orangeSoft: "#F2B8A4", blue: "#1D5A8C", blue9: "#0A2540",
+    blue4: "#6F9BC2", blue2: "#A9C6E0", gray: "#8893A0", gray2: "#C3CAD2",
+    panel: "#ECE5D7", rule: "#E2DACB", paper: "#F5F0E6", ink: "#141E29", muted: "#5D6875"
   };
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const T = ms => (reduced ? 0 : ms);
@@ -160,7 +160,7 @@
     const { g, iw, ih } = frame(el, H, m);
     const x = d3.scaleBand(years, [0, iw]).padding(0.22);
     const y = d3.scaleLinear([0, 38000], [ih, 0]);
-    const col = yr => (yr >= 2020 && yr <= 2022 ? "#2E6A58" : yr >= 2023 ? C.orange : C.green4);
+    const col = yr => (yr >= 2020 && yr <= 2022 ? "#2F5F8F" : yr >= 2023 ? C.orange : C.blue4);
     g.selectAll("rect").data(years).join("rect")
       .attr("x", d => x(d)).attr("width", x.bandwidth())
       .attr("y", d => y(D.alap[yi(d)])).attr("height", d => ih - y(D.alap[yi(d)])).attr("rx", 2).attr("fill", col)
@@ -193,11 +193,11 @@
     const clipId = "clip-trend";
     const clip = f.svg.append("clipPath").attr("id", clipId).append("rect").attr("x", -10).attr("y", -20).attr("height", ih + 40).attr("width", 0);
     g.append("path").datum(vals).attr("clip-path", `url(#${clipId})`).attr("fill", "none")
-      .attr("stroke", C.green9).attr("stroke-width", 2.5).attr("stroke-linejoin", "round")
+      .attr("stroke", C.blue9).attr("stroke-width", 2.5).attr("stroke-linejoin", "round")
       .attr("d", d3.line().x((d, i) => x(years[i])).y(d => y(d)));
     const pts = g.append("g").selectAll("circle").data(years).join("circle")
       .attr("cx", d => x(d)).attr("cy", d => y(vals[yi(d)])).attr("r", 4.5)
-      .attr("fill", C.green9).attr("stroke", "#fff").attr("stroke-width", 2).style("opacity", 0);
+      .attr("fill", C.blue9).attr("stroke", C.paper).attr("stroke-width", 2).style("opacity", 0);
     const ann = g.append("g").attr("class", "annot");
     const focus = g.append("circle").attr("r", 8).attr("fill", "none").attr("stroke", C.orange).attr("stroke-width", 2).style("opacity", 0);
 
@@ -233,7 +233,7 @@
   // =====================================================================
   const SER = {
     alap: { color: C.orange, dash: null },
-    mester: { color: C.green, dash: null },
+    mester: { color: C.blue, dash: null },
     osztatlan: { color: C.gray, dash: null },
     foszk: { color: C.gray, dash: "5 4" }
   };
@@ -267,7 +267,7 @@
       if (yr == null) return;
       const vis = D.index.filter(s => !hiddenIndex.has(s.key));
       vis.forEach(s => dots.append("circle").attr("cx", x(yr)).attr("cy", y(s.values[yi(yr)])).attr("r", 4.5)
-        .attr("fill", SER[s.key].color).attr("stroke", "#fff").attr("stroke-width", 2));
+        .attr("fill", SER[s.key].color).attr("stroke", C.paper).attr("stroke-width", 2));
       const sorted = vis.slice().sort((a, b) => b.values[yi(yr)] - a.values[yi(yr)]);
       showTip(ev, title(`${yr} (2019 = 100)`) + sorted.map(s => row(SER[s.key].color, s.name, s.values[yi(yr)], !!SER[s.key].dash)).join(""));
     });
@@ -314,7 +314,7 @@
     const m = { top: 24, right: 8, bottom: 46, left: 48 };
     const { g, iw, ih } = frame(el, H, m);
     const data = D.nappaliVsReszido;
-    const keys = [{ k: "reszido", name: "Részidős", color: C.orange }, { k: "nappali", name: "Nappali", color: C.green }];
+    const keys = [{ k: "reszido", name: "Részidős", color: C.orange }, { k: "nappali", name: "Nappali", color: C.blue }];
     const x0 = d3.scaleBand(data.map(d => d.label), [0, iw]).padding(0.28);
     const x1 = d3.scaleBand(keys.map(k => k.k), [0, x0.bandwidth()]).padding(0.08);
     const y = d3.scaleLinear([-0.5, 1.1], [ih, 0]);
@@ -356,7 +356,7 @@
 
     const bands = g.append("g");
     const base = bands.append("g").style("opacity", 0);
-    base.append("rect").attr("x", x(2016.5)).attr("width", x(2019.5) - x(2016.5)).attr("height", ih).attr("fill", "#F4EFE6");
+    base.append("rect").attr("x", x(2016.5)).attr("width", x(2019.5) - x(2016.5)).attr("height", ih).attr("fill", "#DDE5EC");
     base.append("text").attr("class", "band-label").attr("x", x(2018)).attr("y", -10).attr("text-anchor", "middle").text("bázis 2017–19");
     const ban = bands.append("g").style("opacity", 0);
     ban.append("rect").attr("class", "band").attr("x", x(2019.5)).attr("width", x(2022.5) - x(2019.5)).attr("height", ih);
@@ -368,11 +368,11 @@
     const clipId = "clip-event";
     const clip = f.svg.append("clipPath").attr("id", clipId).append("rect").attr("x", -10).attr("y", -20).attr("height", ih + 40).attr("width", 0);
     g.append("path").datum(v).attr("clip-path", `url(#${clipId})`).attr("fill", "none")
-      .attr("stroke", C.green9).attr("stroke-width", 2.5).attr("stroke-linejoin", "round")
+      .attr("stroke", C.blue9).attr("stroke-width", 2.5).attr("stroke-linejoin", "round")
       .attr("d", d3.line().x((d, i) => x(years[i])).y(d => y(d)));
     const pts = g.append("g").selectAll("circle").data(years).join("circle")
       .attr("cx", d => x(d)).attr("cy", d => y(v[yi(d)])).attr("r", 4.5)
-      .attr("fill", d => (d >= 2020 && d <= 2022 ? C.orange : C.green9)).attr("stroke", "#fff").attr("stroke-width", 2).style("opacity", 0);
+      .attr("fill", d => (d >= 2020 && d <= 2022 ? C.orange : C.blue9)).attr("stroke", C.paper).attr("stroke-width", 2).style("opacity", 0);
     const ann = g.append("g").attr("class", "annot");
     const focus = g.append("circle").attr("r", 8).attr("fill", "none").attr("stroke", C.orange).attr("stroke-width", 2).style("opacity", 0);
 
@@ -424,10 +424,10 @@
     const gapYrs = [2019, 2020, 2021, 2022, 2023];
     const area = g.append("path").attr("fill", C.orangeSoft).attr("opacity", 0.75);
     const cfLine = g.append("path").attr("fill", "none").attr("stroke", C.orange).attr("stroke-width", 2.25).attr("stroke-dasharray", "6 4");
-    g.append("path").datum(yrs).attr("fill", "none").attr("stroke", C.green9).attr("stroke-width", 2.5)
+    g.append("path").datum(yrs).attr("fill", "none").attr("stroke", C.blue9).attr("stroke-width", 2.5)
       .attr("d", d3.line().x(d => x(d)).y(d => y(act(d))));
     g.append("g").selectAll("circle").data(yrs).join("circle").attr("cx", d => x(d)).attr("cy", d => y(act(d)))
-      .attr("r", 4).attr("fill", C.green9).attr("stroke", "#fff").attr("stroke-width", 2);
+      .attr("r", 4).attr("fill", C.blue9).attr("stroke", C.paper).attr("stroke-width", 2);
     const cfDots = g.append("g");
     const lab = g.append("g").attr("class", "annot");
     lab.append("text").attr("x", x(2016)).attr("y", y(act(2016)) - 14).text("tényleges").style("font-weight", 700);
@@ -440,7 +440,7 @@
       const dur = anim ? T(250) : 0;
       area.transition().duration(dur).attr("d", d3.area().x(d => x(d)).y0(d => y(act(d))).y1(d => y(cfv[d]))(gapYrs));
       cfLine.transition().duration(dur).attr("d", d3.line().x(d => x(d)).y(d => y(cfv[d]))(gapYrs));
-      cfDots.selectAll("circle").data([2020, 2021, 2022]).join("circle").attr("r", 4).attr("fill", "#fff")
+      cfDots.selectAll("circle").data([2020, 2021, 2022]).join("circle").attr("r", 4).attr("fill", C.paper)
         .attr("stroke", C.orange).attr("stroke-width", 2).attr("cx", d => x(d))
         .transition().duration(dur).attr("cy", d => y(cfv[d]));
       const top = d3.max([2020, 2021, 2022], d => cfv[d]);
@@ -450,7 +450,7 @@
 
     yearHover(g, x, iw, ih, () => yrs, (yr, ev) => {
       if (yr == null) return;
-      let html = title(yr) + row(C.green9, "Tényleges", fInt(act(yr)) + " fő");
+      let html = title(yr) + row(C.blue9, "Tényleges", fInt(act(yr)) + " fő");
       if (yr >= 2020 && yr <= 2022) {
         html += row(C.orange, "Gát nélkül várható", fInt(Math.round(cfv[yr])) + " fő", true) +
           row(null, "Hiányzó", fInt(Math.round(cfv[yr] - act(yr))) + " fő");
@@ -472,7 +472,7 @@
   // =====================================================================
   // 4. 280 pont – arány idősor
   // =====================================================================
-  const S280 = { allami: C.green, onkolt: C.orange };
+  const S280 = { allami: C.blue, onkolt: C.orange };
   function b280Chart(el) {
     const H = blockHeight(el, 0.52, 400);
     const m = { top: 28, right: isMobile() ? 92 : 118, bottom: 30, left: 44 };
@@ -498,7 +498,7 @@
     yearHover(g, x, iw, ih, () => years, (yr, ev) => {
       dots.selectAll("*").remove();
       if (yr == null) return;
-      D.below280.forEach(s => dots.append("circle").attr("cx", x(yr)).attr("cy", y(s.values[yi(yr)])).attr("r", 4.5).attr("fill", S280[s.key]).attr("stroke", "#fff").attr("stroke-width", 2));
+      D.below280.forEach(s => dots.append("circle").attr("cx", x(yr)).attr("cy", y(s.values[yi(yr)])).attr("r", 4.5).attr("fill", S280[s.key]).attr("stroke", C.paper).attr("stroke-width", 2));
       showTip(ev, title(yr) + D.below280.map(s => row(S280[s.key], s.name, fPct(s.values[yi(yr)]))).join("") +
         (yr >= 2015 && yr <= 2022 ? note("280 pontos jogszabályi minimum") : ""));
     });
@@ -509,7 +509,7 @@
   // 4. 280 pont – hisztogram (évválasztó)
   // =====================================================================
   let histMode = "both";
-  const HC = { 2022: C.green4, 2023: C.orange };
+  const HC = { 2022: C.blue4, 2023: C.orange };
   function histChart(el) {
     const H = blockHeight(el, 0.52, 400);
     const m = { top: 30, right: 8, bottom: 40, left: 44 };
@@ -574,7 +574,7 @@
     const y = d3.scaleLinear([0, 0.7], [ih, 0]);
     yGrid(g, y, iw, fPct, 4, [0, 0.2, 0.4, 0.6]);
     g.append("g").attr("class", "axis").attr("transform", `translate(0,${ih})`).call(d3.axisBottom(x).tickSize(0).tickPadding(8).tickFormat(d => d));
-    g.selectAll(".b").data(ys).join("path").attr("fill", d => (d === 2022 ? C.gray2 : C.green))
+    g.selectAll(".b").data(ys).join("path").attr("fill", d => (d === 2022 ? C.gray2 : C.blue))
       .attr("d", d => barPath(x(d), ih, x.bandwidth(), ih - y(values[ys.indexOf(d)]), true))
       .on("pointermove", (ev, d) => showTip(ev, title(d) + row(null, "280 alatti soron", fPct1(values[ys.indexOf(d)])) + (d === 2022 ? note("még érvényben volt a 280 pontos minimum") : "")))
       .on("pointerleave", hideTip);
@@ -696,7 +696,7 @@
   legend(document.getElementById("legend-index"),
     D.index.map(s => ({ key: s.key, name: s.name, color: SER[s.key].color, dash: SER[s.key].dash })), true,
     (k, on) => { on ? hiddenIndex.delete(k) : hiddenIndex.add(k); inst["chart-index"].update(stepOf.index || 0, true); });
-  legend(document.getElementById("legend-np"), [{ name: "Részidős", color: C.orange, box: true }, { name: "Nappali", color: C.green, box: true }], false);
+  legend(document.getElementById("legend-np"), [{ name: "Részidős", color: C.orange, box: true }, { name: "Nappali", color: C.blue, box: true }], false);
   legend(document.getElementById("legend-hist"), [{ name: "2022 (még volt minimum)", color: HC[2022], box: true }, { name: "2023 (eltörlés után)", color: HC[2023], box: true }], false);
   legend(document.getElementById("legend-280"), D.below280.map(s => ({ name: s.name, color: S280[s.key] })), false);
 

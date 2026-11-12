@@ -20,6 +20,6 @@ python3 -m http.server 8000
 | `index.html` | A történet szövege és szerkezete (fejezetek, scrolly-lépések, KPI-csempék) |
 | `assets/data.js` | Minden adat a diasor beágyazott diagramjaiból |
 | `assets/app.js` | D3-diagramok, scrollytelling, tooltipek, csúszka, adattáblák |
-| `assets/style.css` | A diasor szerkesztőségi designja (sötétzöld / narancs) |
+| `assets/style.css` | A diasor szerkesztőségi designja (mélykék / narancs) |
 
 A különbségek különbsége becslést (−29,0%, −6,6%, ≈ 19 400 fő) az `app.js` az adatokból újraszámolja.
