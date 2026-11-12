@@ -554,6 +554,8 @@
       const st = D.hist.stats;
       const f1 = n => fNum1(n).replace(/,0$/, "");
       document.getElementById("hist-min").textContent = histMode === "both" ? `${st[2022].min} → ${st[2023].min}` : String(st[histMode].min);
+      const fl = D.hist.y2022[i280], fl3 = D.hist.y2023[i280];
+      document.getElementById("hist-floor").textContent = histMode === "both" ? `${fPct(fl)} → ${fPct(fl3)}` : fPct(histMode === "2022" ? fl : fl3);
       document.getElementById("hist-med").textContent = histMode === "both" ? `${f1(st[2022].median)} → ${f1(st[2023].median)}` : f1(st[histMode].median);
     }
     update(false);
