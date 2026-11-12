@@ -163,11 +163,9 @@
     const col = yr => (yr >= 2020 && yr <= 2022 ? "#2E6A58" : yr >= 2023 ? C.orange : C.green4);
     g.selectAll("rect").data(years).join("rect")
       .attr("x", d => x(d)).attr("width", x.bandwidth())
-      .attr("y", ih).attr("height", 0).attr("rx", 2).attr("fill", col)
+      .attr("y", d => y(D.alap[yi(d)])).attr("height", d => ih - y(D.alap[yi(d)])).attr("rx", 2).attr("fill", col)
       .on("pointermove", (ev, d) => showTip(ev, title(d) + row(null, "Jelentkezők", fInt(D.alap[yi(d)]) + " fő")))
-      .on("pointerleave", hideTip)
-      .transition().delay((d, i) => T(300 + i * 70)).duration(T(700)).ease(d3.easeCubicOut)
-      .attr("y", d => y(D.alap[yi(d)])).attr("height", d => ih - y(D.alap[yi(d)]));
+      .on("pointerleave", hideTip);
     [[2013, "start", "2013"], [2021, "middle", "2020–22"], [2026, "end", "2026"]].forEach(([yr, an, t]) => {
       const cx = an === "start" ? x(yr) : an === "end" ? x(yr) + x.bandwidth() : x(yr) + x.bandwidth() / 2;
       g.append("text").attr("x", cx).attr("y", ih + 18).attr("text-anchor", an).text(t);
@@ -326,12 +324,10 @@
     grp.append("text").attr("class", "value-label").attr("x", x0.bandwidth() / 2).attr("y", ih + 20).attr("text-anchor", "middle").text(d => d.label);
     grp.append("text").attr("class", "band-label").attr("x", x0.bandwidth() / 2).attr("y", ih + 36).attr("text-anchor", "middle").text(d => d.sub);
     keys.forEach(k => {
-      const bars = grp.append("path").attr("fill", k.color)
-        .attr("d", d => barPath(x1(k.k), y(0), x1.bandwidth(), 0, d[k.k] >= 0))
+      grp.append("path").attr("fill", k.color)
+        .attr("d", d => barPath(x1(k.k), y(0), x1.bandwidth(), y(0) - y(d[k.k]), d[k.k] >= 0))
         .on("pointermove", (ev, d) => showTip(ev, title(`${d.label} (${d.sub})`) + row(k.color, k.name, fPctS(d[k.k])) + row(null, "Arány részidő / nappali", fNum1(d.reszido / d.nappali).replace("-", "") + "×")))
         .on("pointerleave", hideTip);
-      bars.transition().duration(T(800)).delay(T(150))
-        .attr("d", d => barPath(x1(k.k), y(0), x1.bandwidth(), y(0) - y(d[k.k]), d[k.k] >= 0));
       grp.append("text").attr("class", "value-label").attr("text-anchor", "middle")
         .attr("x", x1(k.k) + x1.bandwidth() / 2)
         .attr("y", d => (d[k.k] >= 0 ? y(d[k.k]) - 6 : y(d[k.k]) + 16))
@@ -581,11 +577,9 @@
     yGrid(g, y, iw, fPct, 4, [0, 0.2, 0.4, 0.6]);
     g.append("g").attr("class", "axis").attr("transform", `translate(0,${ih})`).call(d3.axisBottom(x).tickSize(0).tickPadding(8).tickFormat(d => d));
     g.selectAll(".b").data(ys).join("path").attr("fill", d => (d === 2022 ? C.gray2 : C.green))
-      .attr("d", d => barPath(x(d), ih, x.bandwidth(), 0, true))
+      .attr("d", d => barPath(x(d), ih, x.bandwidth(), ih - y(values[ys.indexOf(d)]), true))
       .on("pointermove", (ev, d) => showTip(ev, title(d) + row(null, "280 alatti soron", fPct1(values[ys.indexOf(d)])) + (d === 2022 ? note("még érvényben volt a 280 pontos minimum") : "")))
-      .on("pointerleave", hideTip)
-      .transition().duration(T(800)).delay((d, i) => T(i * 90))
-      .attr("d", d => barPath(x(d), ih, x.bandwidth(), ih - y(values[ys.indexOf(d)]), true));
+      .on("pointerleave", hideTip);
     g.selectAll(".l").data(ys).join("text").attr("class", "value-label").attr("text-anchor", "middle")
       .attr("x", d => x(d) + x.bandwidth() / 2).attr("y", d => y(values[ys.indexOf(d)]) - 8)
       .text(d => fPct(values[ys.indexOf(d)]) + (d === 2022 ? " (minimum)" : ""));
@@ -616,11 +610,9 @@
     g.append("line").attr("class", "zero-line").attr("x1", 0).attr("x2", iw).attr("y1", y(0)).attr("y2", y(0));
     const isR = d => reform.includes(d);
     g.selectAll(".b").data(ys).join("path").attr("fill", d => (isR(d) ? C.orange : C.gray2))
-      .attr("d", d => barPath(x(d), y(0), x.bandwidth(), 0, true))
+      .attr("d", d => { const v = values[ys.indexOf(d)]; return barPath(x(d), y(0), x.bandwidth(), Math.abs(y(v) - y(0)), v >= 0); })
       .on("pointermove", (ev, d) => showTip(ev, title(`${d - 1} → ${d}`) + row(null, "Alap / mester arány", fPct1S(values[ys.indexOf(d)])) + (isR(d) ? note(d === 2020 ? "Reformév: emelt érettségi bevezetése" : "Reformév: emelt és 280 pont eltörlése") : "")))
-      .on("pointerleave", hideTip)
-      .transition().duration(T(800)).delay((d, i) => T(i * 50))
-      .attr("d", d => { const v = values[ys.indexOf(d)]; return barPath(x(d), y(0), x.bandwidth(), Math.abs(y(v) - y(0)), v >= 0); });
+      .on("pointerleave", hideTip);
     reform.forEach(r => {
       const v = values[ys.indexOf(r)];
       g.append("text").attr("class", "value-label").attr("text-anchor", "middle").attr("x", x(r) + x.bandwidth() / 2)
